@@ -16,11 +16,12 @@
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
+                    <a href="{{ URL::signedRoute('user.edit', ['id' => $user->id])}}">Edit</a>
+                    <a href="{{ URL::signedRoute('user.delete', ['id' => $user->id])}}">Delete</a> 
+                </td>
             </tr>
             @endforeach
         </tbody>
     </table>
-    {{-- {{$users->links()}} --}}
+    {{$users->links()}}
 @endsection

@@ -45,7 +45,7 @@
                                                 </ul>
                                             </div>
                                             @endif
-                                        <form class="user" method="post">
+                                        <form class="user" method="POST">
                                             @csrf
                                             <div class="form-group">
                                                 <input type="email" name="email" class="form-control form-control-user"

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>SB Admin 2</title>
 
     <!-- Custom fonts for this template-->
     <link href="/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -330,10 +330,9 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @auth
-                                    <br/>Hi {{Auth::user()->name}},<br/>
-                                    {{-- <a href="{{Route('logout')}}">Logout</a> --}}
-                                    @endauth
+                                {{-- @auth --}}
+                                    {{-- {{user()->name}} --}}
+                                    {{-- @endauth --}}
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee
                                     
                                 </span>
@@ -432,6 +431,8 @@
 
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
+
+    @yield('scripts')
 
 </body>
 
