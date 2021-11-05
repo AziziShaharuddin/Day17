@@ -45,7 +45,7 @@ paths:
   /api/login:
     post:
       summary: 'Get a JWT via given credentials.'
-      description: ''
+      description: 'Login API'
       parameters:
         -
           in: header
@@ -74,18 +74,22 @@ paths:
                 email:
                   type: string
                   description: 'Must be a valid email address.'
-                  example: lubowitz.courtney@example.net
+                  example: dfeeney@example.org
                 password:
                   type: string
                   description: 'Must be at least 6 characters.'
-                  example: biebh
+                  example: ''
+                user_id:
+                  type: integer
+                  description: 'The id of the user'
+                  example: 6
               required:
                 - email
                 - password
       security: []
   /api/dashboard:
     post:
-      summary: ''
+      summary: Dashboard
       description: ''
       parameters:
         -
@@ -102,10 +106,63 @@ paths:
           example: application/json
           schema:
             type: string
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {{token}}'
+          schema:
+            type: string
+      responses:
+        401:
+          description: 'invalid token'
+          content:
+            text/plain:
+              schema:
+                type: string
+                example: ''
+      tags:
+        - Endpoints
+  /api/users:
+    post:
+      summary: "User API\nGet all the user by pagination"
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Authorization
+          description: ''
+          example: 'Bearer {{token}}'
+          schema:
+            type: string
       responses: {  }
       tags:
         - Endpoints
-      security: []
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                page:
+                  type: integer
+                  description: 'Page number for pagination.'
+                  example: 1
 tags:
   -
     name: Endpoints

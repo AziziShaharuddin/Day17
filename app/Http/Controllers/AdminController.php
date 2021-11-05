@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Job;
+use App\Models\EmployeeJob;
 use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use JWTAuth;
@@ -14,6 +14,7 @@ use App\Http\Middleware\Authenticate;
 class AdminController extends Controller
 {
     //
+    
     public function login(Request $request) {
 
         if($request->isMethod('post')){
@@ -48,7 +49,7 @@ class AdminController extends Controller
 
     public function dashboard () {
         $jwt_token = session('jwt_token');
-        $jobCount = Job::get()->count();
+        $jobCount = EmployeeJob::get()->count();
         $userCount = User::get()->count();
         $departmentCount = Department::get()->count();
         return view ('admin.dashboard', compact('jwt_token', 'jobCount', 'departmentCount', 'userCount'));
@@ -85,15 +86,15 @@ class AdminController extends Controller
     }
 
     public function job () {
-        $jobs = Job::get();
-        $jobs = Job::paginate(10);
+        $jobs = EmployeeJob::get();
+        $jobs = EmployeeJob::paginate(10);
 
         return view ('admin.job', ["jobs"=>$jobs]);
     }
 
     public function jobEdit(Request $request) {
 
-        $jobs = Job::where("id", $request->id)->first(); 
+        $jobs = EmployeeJob::where("id", $request->id)->first(); 
         $status="";
 
         if(isset($request->title)){
@@ -110,7 +111,7 @@ class AdminController extends Controller
     }
 
     public function jobDelete(Request $request) {
-        $jobs = Job::where("id", $request->id);
+        $jobs = EmployeeJob::where("id", $request->id);
         $status="";
         
         // if (isset($request->title)){

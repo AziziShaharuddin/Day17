@@ -20,7 +20,7 @@ class JobSeeder extends Seeder
         //
         $faker = Faker::create();
         foreach (range(1,200) as $index) {
-            DB::table('jobs')->insert([
+            DB::table('employee_jobs')->insert([
                 'title' => $faker->sentence(2),
                 'description' => $faker->text(),
                 'min_salary' => '2000',
