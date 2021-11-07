@@ -15,7 +15,10 @@ class UserObserver
     public function created(User $user)
     {
         //
-        
+        $email_list['email'] = $user->email;
+        $email_list['user'] = $user;
+        dispatch(new \App\Jobs\QueueJob($email_list));
+        // dd('User created dy');
     }
 
     /**
@@ -27,6 +30,13 @@ class UserObserver
     public function updated(User $user)
     {
         //
+        // if ($user->wasChanged()){
+        //     dd('The user table has been updated');
+        // }
+        // dd('The user table has been updated');
+        $email_list['email'] = $user->email;
+        $email_list['user'] = $user;
+        dispatch(new \App\Jobs\UpdatedEmailJob($email_list));
     }
 
     /**
@@ -37,7 +47,11 @@ class UserObserver
      */
     public function deleted(User $user)
     {
-        //
+        //To make changes for delete observer
+        // dd('The selected user has been deleted');
+        $email_list['email'] = $user->email;
+        $email_list['user'] = $user;
+        dispatch(new \App\Jobs\DeletedJob($email_list));
     }
 
     /**

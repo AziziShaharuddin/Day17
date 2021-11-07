@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\UserResource;
+use App\Models\User;
+use JWTAuth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use JWTAuth;
-use App\Models\User;
 use App\Http\Traits\JsonTrait;
 
 class ApiController extends Controller
@@ -13,10 +14,10 @@ class ApiController extends Controller
     //
     use jsonTrait;
     /**
-     * Get a JWT via given credentials.
      * Login API
-     * 
-     * @bodyParam user_id int The id of the user
+     * @bodyParam email string required  Email of the user. Example: superadmin@invoke.com
+     * @bodyParam password string required  Password of the user. Example: password
+     * @bodyParam user_id int  The id of the user. Example: 9
      * @return \Illuminate\Http\JsonResponse
      */
     public function login(Request $request){
@@ -41,6 +42,11 @@ class ApiController extends Controller
     }
     /**
     * Dashboard
+    *
+    * Check that the service is up. If everything is okay, you'll get a 200 OK response.
+    *
+    * Otherwise, the request will fail with a 400 error, and a response listing the failed services.
+    * 
     * @authenticated
     * @header Authorization Bearer {{token}}
     * @response 401 scenario="invalid token"
@@ -50,11 +56,16 @@ class ApiController extends Controller
         // use jsonTrait;
         $user_total = User::count();
         $code = 0;
-        $employee = Employee::whereId(1)->with(['user', 'job_history'])->first();
-        return $this->jsonResponse(compact('user_total', 'code'), '', 200);
-        return response()->json(
-            compact('user_total','code')
-        );
+        $employee = Employee::whereId(1)
+        ->with(['user', 'job_history'])
+        ->first();
+        return $this->jsonResponse(
+            compact('user_total', 'code'), //no employee
+             '',
+             200);
+        // return response()->json(
+        //     compact('user_total','code')
+        // );
     }
 
     /**

@@ -2,19 +2,18 @@
 
 namespace App\Jobs;
 
-use App\Mail\QueueEmail; // new
+use App\Mail\DeletedEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail; // new
+use Illuminate\Support\Facades\Mail;
 
-class QueueJob implements ShouldQueue
+class DeletedJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     protected $email_list;
 
     /**
@@ -26,7 +25,6 @@ class QueueJob implements ShouldQueue
     {
         //
         $this->email_list = $email_list;
-
     }
 
     /**
@@ -36,8 +34,8 @@ class QueueJob implements ShouldQueue
      */
     public function handle()
     {
-        //
-        $email = new QueueEmail($this->email_list);
+        //Not right. To make changes
+        $email = new DeletedEmail($this->email_list);
         Mail::to($this->email_list['email'])->send($email);
     }
 }

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Traits\JsonTrait; //why do we need this?
+use JWTAuth;
 use App\Models\User;
 use App\Models\EmployeeJob;
 use App\Models\Department;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use JWTAuth;
 // use Illuminate\Support\Facades\Hash;
-use App\Http\Middleware\Authenticate;
+// use App\Http\Middleware\Authenticate;
 
 class AdminController extends Controller
 {

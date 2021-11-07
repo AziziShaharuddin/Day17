@@ -1,10 +1,10 @@
 <html>
 <head>
-    <title>New Record</title>
+    <title>Updated User</title>
 </head>
 <body>
 Hi {{$email_list['user']->name}}
-<p> Your record has been added.</p>
+<p> The selected users have been updated.</p>
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmodtempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
 consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse

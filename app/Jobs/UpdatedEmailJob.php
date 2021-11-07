@@ -2,19 +2,18 @@
 
 namespace App\Jobs;
 
-use App\Mail\QueueEmail; // new
+use App\Mail\UpdatedEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Mail; // new
+use Illuminate\Support\Facades\Mail;
 
-class QueueJob implements ShouldQueue
+class UpdatedEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-
     protected $email_list;
 
     /**
@@ -26,7 +25,6 @@ class QueueJob implements ShouldQueue
     {
         //
         $this->email_list = $email_list;
-
     }
 
     /**
@@ -37,7 +35,7 @@ class QueueJob implements ShouldQueue
     public function handle()
     {
         //
-        $email = new QueueEmail($this->email_list);
+        $email = new UpdatedEmail($this->email_list);
         Mail::to($this->email_list['email'])->send($email);
     }
 }

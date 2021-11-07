@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class QueueEmail extends Mailable
+class UpdatedEmail extends Mailable
 {
     use Queueable, SerializesModels;
     protected $email_list;
@@ -30,7 +30,7 @@ class QueueEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.testQueueEmail',
+        return $this->view('emails.updatedUserEmail',
     [
         'email_list' => $this->email_list
     ]);
